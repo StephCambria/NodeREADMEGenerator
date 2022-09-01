@@ -57,7 +57,7 @@ inquirer.prompt(
             type: 'list',
             message: "Which license did you use?",
             name: 'license',
-            choices: ['The MIT License', 'The GPL License', 'Apache License', 'GNU License', 'N/A'],
+            choices: ['The MIT License', 'The ISC License', 'Apache License', 'GNU License'],
             // validate property to check if the user provided a value
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
             
@@ -105,13 +105,23 @@ inquirer.prompt(
     ]
 );
 
+function renderBadge(license) {
+    const badge = {
+        mit: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+        isc: "[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)",
+        apache: "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
+        gnu: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
+    }
+    return badge [license];
+}
+
 
 // function to generate input data
 
 function generateMD(data) {
 
     return `# ${data.title}
-    ${badge}
+    ${renderBadge()}
     ${data.description}
 
     ## Table of Contents:
@@ -125,7 +135,7 @@ function generateMD(data) {
     ### Installation:
     Node.js needs to be installed on your computer. If the project folder does not have a package.json or a package-lock.json file, please install. 
     In order to install the necessary dependencies, open the console and run the following:
-    \`\`\` ${data.installations} \`\`\`
+   \`\`\` npm install \`\`\`
 
     ### Usage:
     ${data.usage}
@@ -139,10 +149,10 @@ function generateMD(data) {
 
     ### Tests:
     In order to test, open the console and run the following:
-    \`\`\` ${data.tests} \`\`\`
+    ${data.test}
 
     ### Questions:
-    If you have any questions, contaxt me on [GitHub](https://github.com/${data.username}) or send an email to ${data.email}
+    If you have any questions, contact me on [GitHub](https://github.com/${data.username}) or send an email to ${data.email}
     `
 }
 
