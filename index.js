@@ -72,8 +72,9 @@ inquirer.prompt(
         },
         {
             type: 'input',
-            message: "Please state if there are any tests required.",
+            message: "Is testing required?",
             name: 'test',
+            choices: ['yes', 'no'],
             // validate property to check if the user provided a value
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
             
@@ -105,15 +106,14 @@ inquirer.prompt(
     ]
 );
 
-function renderBadge(license) {
+// badge links
     const badge = {
         mit: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
         isc: "[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)",
         apache: "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
         gnu: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
     }
-    return badge [license];
-}
+
 
 
 // function to generate input data
@@ -121,10 +121,12 @@ function renderBadge(license) {
 function generateMD(data) {
 
     return `# ${data.title}
-    ${renderBadge()}
+    ${badge}
+
+    ##📝 Description
     ${data.description}
 
-    ## Table of Contents:
+    ##📚 Table of Contents:
     * [Installation] (#installation)
     * [Usage] (#usage)
     * [License] (#license)
@@ -132,26 +134,26 @@ function generateMD(data) {
     * [Tests] (#test)
     * [Questions] (#questions)
     
-    ### Installation:
+    ###🔧 Installation:
     Node.js needs to be installed on your computer. If the project folder does not have a package.json or a package-lock.json file, please install. 
     In order to install the necessary dependencies, open the console and run the following:
    \`\`\` npm install \`\`\`
 
-    ### Usage:
+    ###💻 Usage:
     ${data.usage}
 
-    ### License:
+    ###🖋 License:
     This project is licensed under:
     ${data.license}
 
-    ### Contributing:
+    ###🧑‍💻 Contributing:
     ${data.contribute}
 
-    ### Tests:
-    In order to test, open the console and run the following:
+    ###👾 Tests:
+    Is testing required?
     ${data.test}
 
-    ### Questions:
+    ###❔ Questions:
     If you have any questions, contact me on [GitHub](https://github.com/${data.username}) or send an email to ${data.email}
     `
 }
