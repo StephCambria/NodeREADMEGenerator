@@ -123,6 +123,7 @@ function generateMD(data) {
     * [Questions] (#questions)
     
     ### Installation:
+    Node.js needs to be installed on your computer. If the project folder does not have a package.json or a package-lock.json file, please install. 
     In order to install the necessary dependencies, open the console and run the following:
     \`\`\` ${data.installations} \`\`\`
 
