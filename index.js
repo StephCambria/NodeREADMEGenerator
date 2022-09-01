@@ -73,5 +73,21 @@ inquirer.prompt(
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
             
         },
+        {
+            type: 'input',
+            message: "What is your GitHub username?",
+            name: 'questions',
+            // validate property to check if the user provided a value
+            validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
+            
+        },
+        {
+            type: 'input',
+            message: "Please provide your GitHub profile link.",
+            name: 'questions',
+            // validate property to check if the user provided a value
+            validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
+            
+        },
     ]
 )
