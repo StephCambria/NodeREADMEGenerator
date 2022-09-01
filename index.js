@@ -24,7 +24,7 @@ inquirer.prompt(
         },
         {
             type: 'input',
-            message: "Briefly describe your application",
+            message: "Briefly describe your application.",
             name: 'description',
             // validate property to check if the user provided a value
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
@@ -53,6 +53,22 @@ inquirer.prompt(
             message: "Which license did you use?",
             name: 'license',
             choices: ['The MIT License', 'The GPL License', 'Apache License', 'GNU License', 'N/A'],
+            // validate property to check if the user provided a value
+            validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
+            
+        },
+        {
+            type: 'input',
+            message: "Please state if others can contribute.",
+            name: 'contribute',
+            // validate property to check if the user provided a value
+            validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
+            
+        },
+        {
+            type: 'input',
+            message: "Please state if there are any tests required.",
+            name: 'test',
             // validate property to check if the user provided a value
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
             
