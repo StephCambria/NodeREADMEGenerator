@@ -57,7 +57,7 @@ inquirer.prompt(
             type: 'list',
             message: "Which license did you use?",
             name: 'license',
-            choices: ['The MIT License', 'The ISC License', 'Apache License', 'GNU License'],
+            choices: ['The MIT License', 'Apache License', 'GNU License'],
             // validate property to check if the user provided a value
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
             
@@ -71,7 +71,7 @@ inquirer.prompt(
             
         },
         {
-            type: 'input',
+            type: 'list',
             message: "Is testing required?",
             name: 'test',
             choices: ['yes', 'no'],
@@ -106,13 +106,6 @@ inquirer.prompt(
     ]
 );
 
-// badge links
-    const badge = {
-        mit: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
-        isc: "[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)",
-        apache: "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
-        gnu: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
-    }
 
 
 
@@ -122,10 +115,8 @@ function generateMD(data) {
 
     return `# ${data.title}
     ${badge}
-
     ##📝 Description
     ${data.description}
-
     ##📚 Table of Contents:
     * [Installation] (#installation)
     * [Usage] (#usage)
@@ -138,25 +129,37 @@ function generateMD(data) {
     Node.js needs to be installed on your computer. If the project folder does not have a package.json or a package-lock.json file, please install. 
     In order to install the necessary dependencies, open the console and run the following:
    \`\`\` npm install \`\`\`
-
     ###💻 Usage:
     ${data.usage}
-
     ###🖋 License:
     This project is licensed under:
     ${data.license}
-
     ###🧑‍💻 Contributing:
     ${data.contribute}
-
     ###👾 Tests:
     Is testing required?
     ${data.test}
-
     ###❔ Questions:
     If you have any questions, contact me on [GitHub](https://github.com/${data.username}) or send an email to ${data.email}
     `
 }
+
+function renderBadge(license){
+    let badge = "";
+    switch(license){
+        case "MIT":
+            return badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+        case "Apache license 2.0":
+            return badge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+        case "GNU General Public License v3.0":
+            return badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+        default:
+            console.log("Render badge failed");
+    }
+    //renderBadge(license);
+}
+
+
 
 questions().then((data) => 
 writeFileAsync('generatedREADME.md', generateMD(data))).then(() => 
