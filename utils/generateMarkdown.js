@@ -1,81 +1,83 @@
-
-
 // Create a function that returns a license badge based on which license is passed in
 // switch statements for the badges
-function renderBadge(license){
-    switch(license){
-        case 'The MIT License':
-            return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-            break;
-        case 'The ISC License':
-            return '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
-            break;
-        case 'The Mozilla License':
-            return '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)';
-            break;
-        case 'The EPL License':
-            return '[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)';
-            break;
-        default:
-            console.log("Render badge failed");
-    }
-    console.log(license);
-}
+// example url https://shields.io/badge/license-MIT-green
 
-// TODO: Create a function that returns the license link
-function licenseLink(license) {
-    switch(license) {
-        case 'The MIT License':
-            return '(https://opensource.org/licenses/MIT)';
-            break;
-        case 'The ISC License':
-            return '(https://opensource.org/licenses/ISC)';
-            break;
-        case 'The Mozilla License':
-            return '(https://opensource.org/licenses/MPL-2.0)';
-            break;
-        case 'The EPL License':
-            return '(https://opensource.org/licenses/EPL-1.0)';
-            break;
-        default:
-            console.log("Render license link failed");
-    }
-    console.log(license);
-}
-
-
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-
-    let licenseBadge = renderBadge(data.license);
-    //let licenseLink = licenseLink(data.license);
+function renderBadge(license) {
+    let badge = "";
   
-    return `
-  # ${data.title}
-  ${licenseBadge}
-  ## Description
-  ${data.description}
-  ## Table of Contents
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [License](#usage)
-  * [Contributing](#contributing)
-  * [Tests](#tests)
-  * [Questions](#questions)
-  ## Installation
-  ${data.installation}
-  ## Usage
-  ${data.usage}
-  ## License
-  * Link for more information: ${licenseLink}
-  ## Contributing
-  ${data.contribute}
-  ## Tests
-  ${data.test}
-  ## Questions
-  * Questions? Visit my GitHub: [${data.questions}](https://github.com/${data.username}) 
-  * With additional questions, feel free to email me at: ${data.email}
-  `;
+    if(license != "None") {
+      badge = "![License Badge](https://shields.io/badge/license-" + license + "-green)";
+    }
+  
+    return badge;
+  }
+
+
+
+// Create a function that returns the license section of README
+// If there is no license, return an empty string
+function renderLicenseSection(license) {
+    let licenseSect = "";
+  
+    // if a license has been selected, create License section
+    // with link to license information
+    if (license != "None") {
+      licenseSect += "## License\n"
+      licenseSect += "This application is licensed under the " + license + " license.\n";
+    }
+  
+    return licenseSect;
+  }
+
+
+// Create a function to generate markdown for README
+function generateMarkdown(data) {
+    const sections = ["Description", "Installation", "Usage", "Contributing", "Tests", "License", "Questions"];
+  
+    // add title
+    let markdown = "# " + data.title + "\n";
+  
+    // add license badge
+    markdown += renderBadge(data.license) + "\n";
+  
+    // add table of contents
+    markdown += "## Table of Contents\n";
+    for (let i=0; i<sections.length; i++) {
+      if (! (sections[i] === "License" && data.license === "None")) {
+        markdown += i+1 + ". [" + sections[i] + "](#" + sections[i][0].toLowerCase() + sections[i].substring(1) + ")\n";
+      }
+    }
+    markdown += "\n";
+  
+    // add description
+    markdown += "## " + sections[0] + "\n";
+    markdown += data.description + "\n";
+  
+    // add installation
+    markdown += "## " + sections[1] + "\n";
+    markdown += data.installation + "\n";
+  
+    // add usage
+    markdown += "## " + sections[2] + "\n";
+    markdown += data.usage + "\n";
+  
+    // add contributing
+    markdown += "## " + sections[3] + "\n";
+    markdown += data.contribute + "\n";
+  
+    // add testing
+    markdown += "## " + sections[4] + "\n";
+    markdown += data.test + "\n";
+  
+    // add license
+    markdown += renderLicenseSection(data.license) + "\n";
+  
+    // add questions
+    markdown += "## " + sections[6] + "\n";
+    markdown += "You can find me [HERE](https://github.com/" + data.username + ") on Github\n";
+    markdown += "You can email me at " + data.email + " if you have any additional questions.\n"
+  
+    return markdown;
   }
   
   module.exports = generateMarkdown;
