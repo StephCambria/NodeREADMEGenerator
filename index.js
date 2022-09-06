@@ -3,8 +3,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown');
-const customFunctions = require('./utils/customFunctions');
-const { writeFile } = require('./utils/customFunctions');
+
+
+const licenses = ['MIT', 'ISC', 'MPL 2.0', 'EPL 1.0'];
 
 
 // Description, 
@@ -56,7 +57,7 @@ const questions = [
             type: 'list',
             message: "Which license did you use?",
             name: 'license',
-            choices: ['The MIT License', 'The ISC License', 'The Mozilla License', 'The EPL License'],
+            choices: ['MIT', 'ISC', 'MPL 2.0', 'EPL 1.0'],
             // validate property to check if the user provided a value
             validate: (value) => { if (value) {return true} else {return 'Please enter a value to continue'}},
             
@@ -97,25 +98,21 @@ const questions = [
     ]
 
 
+  // TODO: Create a function to write README file
+function writeToFile(data) {
+    const filename = "./README.md";
 
+    fs.writeFile(filename, data, function (err) {
+        err ? console.log(err) : console.log(filename + " created!")
+    });
+}
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer
-      .prompt(questions)
-      .then(answers => {
-        // Use user feedback for... whatever!!
-        const markdown = generateMarkdown(answers);
-        writeFile('README.md', markdown);
-      })
-      .catch(error => {
-        if (error.isTtyError) {
-          // Prompt couldn't be rendered in the current environment
-        } else {
-          // Something else went wrong
-        }
-      });
-  }
-  
-  // Function call to initialize app
-  init();
+
+    inquirer.prompt(questions)
+    .then (answers => writeToFile(generateMarkdown(answers)))
+}
+
+// Function call to initialize app
+init();
