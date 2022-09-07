@@ -2,7 +2,7 @@
 ![License Badge](https://shields.io/badge/license-ISC-green)
 
 ## Video Demo!
-[Link] (https://watch.screencastify.com/v/UxRdacQtNTHnuFgDj9rO)
+[[DEMO]](https://watch.screencastify.com/v/UxRdacQtNTHnuFgDj9rO)
 
 ## Table of Contents
 1. [Description](#description)
@@ -20,7 +20,7 @@ Clone the project and run the following: npm install inquirer@8.2.4
 ## Usage
 To run this application, go to the project's root directory and type node index.js in the command line
 ## Contributing
-You can contribute to this project by submitting bugs via https://github.com/StephCambria/NodeREADMEGenerator/issues
+You can contribute to this project by submitting bugs via [ISSUES](https://github.com/StephCambria/NodeREADMEGenerator/issues).
 ## Tests
 no
 ## License
