@@ -1,5 +1,9 @@
 # README Generator with Node.js and Inquirer
 ![License Badge](https://shields.io/badge/license-ISC-green)
+
+## Video Demo!
+[Link] (https://watch.screencastify.com/v/UxRdacQtNTHnuFgDj9rO)
+
 ## Table of Contents
 1. [Description](#description)
 2. [Installation](#installation)
